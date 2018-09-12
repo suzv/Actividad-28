@@ -50,7 +50,7 @@
       <th><%= emp.first_name %></th>
       <th><%= emp.last_name %></th>
       <th><%= emp.email %></th>
-      <th><%= emp.area %></th>
+      <th><%= emp.area.name %></th>
       <th><%= link_to 'X', company_employee_path(@company, emp), method: :delete %></th>
       </tr>
       <% end %>

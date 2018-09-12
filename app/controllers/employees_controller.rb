@@ -1,6 +1,4 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
-
 
   def index
     @employees = Employee.all
@@ -23,19 +21,11 @@ class EmployeesController < ApplicationController
 
   def create
     @company = Company.find(params[:company_id])
-    @employee = Employee.new(employee_params)
+    @employee = @company.employees.build(employee_params)
     @employee.save
-  
+    redirect_to company_path(@employee.company_id)
 
-    respond_to do |format|
-      if @employee.save
-        format.html { redirect_to @employee, notice: 'employee was successfully created.' }
-        format.json { render :show, status: :created, location: @employee }
-      else
-        format.html { render :new }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
-    end
+
   end
 
 

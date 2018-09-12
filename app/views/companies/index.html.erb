@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Companies</h1>
+
+
+  <table class="table">
+  <thead>
+    <tr>
+
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><h6><%= link_to company.name, company %></h6></td>
+        <td><%= company.employees.count %></td>
+
+        <td><button type="button" class="btn btn-primary"><%= link_to 'Edit', edit_company_path(company) %></button></td>
+        <td><button type="button" class="btn btn-primary"><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></button></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Company', new_company_path %>

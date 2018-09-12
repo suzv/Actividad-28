@@ -1,0 +1,62 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @company.name %>
+</p>
+
+<%= form_with(model: [@company,@employee], local: true) do |form| %>
+  <%= form.hidden_field :company_id, value: @company.id %>
+
+  <div class="field">
+    <%= form.label :first_name %>
+    <%= form.text_field :first_name %>
+  </div>
+  <div class="field">
+    <%= form.label :last_name %>
+    <%= form.text_field :last_name %>
+  </div>
+  <div class="field">
+    <%= form.label :email %>
+    <%= form.text_field :email %>
+  </div>
+  <div class="field">
+    <%= form.label :area_id %>
+    <%= form.select :area_id, Area.pluck(:name,:id)%>
+  </div>
+
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Area</th>
+
+    </tr>
+  </thead>
+  <tbody>
+
+      <% @company.employees.each do |emp| %>
+      <tr>
+      <th><%= emp.first_name %></th>
+      <th><%= emp.last_name %></th>
+      <th><%= emp.email %></th>
+      <th><%= emp.area %></th>
+      <th><%= link_to 'X', company_employee_path(@company, emp), method: :delete %></th>
+      </tr>
+      <% end %>
+
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
